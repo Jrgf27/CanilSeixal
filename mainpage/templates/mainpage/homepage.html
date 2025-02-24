@@ -1,0 +1,74 @@
+{% extends 'mainpage/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<style>
+    .animal-card {
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .animal-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .animal-card.selected {
+        border: 3px solid #0d6efd;
+        transform: translateY(-5px);
+    }
+    
+    .animal-avatar {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin: 1rem auto;
+    }
+</style>
+
+<div class="row justify-content-center g-4">
+    <div class="col-8 col-md-8 col-lg-8">
+        <div class="row">
+            {% for animal in caes %}
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div 
+                    class="card animal-card h-100 text-center"
+
+                    hx-get="{% url 'load_animal_details' animal.id%}"
+                    hx-target="#modal_content" 
+                    hx-swap="innerHTML"
+
+                    data-bs-toggle="modal" 
+                    data-bs-target="#exampleModal">
+
+                        {% if animal.fotos.all %}
+                                <img 
+                                src="{{ animal.fotos.first.imagem.url }}"
+                                class="animal-avatar"
+                                alt="Your Logo">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{animal.name}}</h5>
+                            <p class="card-text text-muted">{{animal.raca}}</p>
+                            {% if animal.adoptante %}
+                                <p class="card-text text-muted">{{animal.adoptante}}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="modal_content">
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
