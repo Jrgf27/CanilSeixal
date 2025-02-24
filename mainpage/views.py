@@ -5,14 +5,17 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 from .models import Animal, AnimalImages, Adoptante
-from .forms import AnimalForm
+from .forms import AnimalForm, AnimalFotosForm
+
+import logging
+logger = logging.getLogger("general_logger")
 
 
 class Homepage(LoginRequiredMixin, TemplateView):
     def get(self, response):
         
-        caes = Animal.objects.filter(cao=True)
-        gatos = Animal.objects.filter(gato=True)
+        caes = Animal.objects.filter(tipo="cao")
+        gatos = Animal.objects.filter(tipo="gato")
         
         animal_form = AnimalForm()
         
@@ -30,11 +33,51 @@ class AnimalDetails(LoginRequiredMixin, TemplateView):
         
         animal = get_object_or_404(Animal, id= animal_id)
         
+        form = AnimalFotosForm()
+        
         context = {
             'animal' : animal,
+            'form' : form
         }
         
         return render(response, 'mainpage/partials/animal_details.html', context)
+    
+    def post(self, response):
+        
+        form = AnimalForm(response.POST)
+        if form.is_valid():
+            animal = form.save()
+            context = {
+                'animal' : animal
+            }
+            return render(response, 'mainpage/partials/animal_card_details.html', context)
+        
+        logger.info(form.errors)
+        return HttpResponse("Falha a salvar!")
+
+
+
+class AnimalImagens(LoginRequiredMixin, TemplateView):
+    def post(self, response, animal_id):
+        
+        form = AnimalFotosForm(response.POST, response.FILES)
+        
+        if form.is_valid():
+            animal = get_object_or_404(Animal, id= animal_id)
+            
+            AnimalImages.objects.create(
+                animal = animal,
+                imagem = form.cleaned_data['imagem']
+            )
+            
+            context = {
+                'animal' : animal
+            }
+            return render(response, 'mainpage/partials/animal_fotos_details.html', context)
+
+        
+        logger.info(form.errors)
+        return HttpResponse("Falha a salvar!")
 
 
 class HealthCheck(TemplateView):

@@ -6,28 +6,8 @@
 </div>
 <div class="modal-body">
     <!-- Animal Type Badge -->
-    <div class="mb-3 text-center">
-        <div id="carouselExample" class="carousel slide">
-            <div class="carousel-inner">
-                {% for foto in animal.fotos.all %}
-                    <div class="carousel-item active" >
-                        <img 
-                        style="height:350px; width:350px;"
-                        class="img-thumbnail"
-                        src="{{foto.imagem.url}}"
-                        alt="Your Logo">
-                  </div>
-                {% endfor %}
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-          </div>
+    <div class="mb-3 text-center" id="animal_fotos_div">
+        {% include "mainpage/partials/animal_fotos_details.html" %}
     </div>
     
     <!-- Card with Basic Info -->

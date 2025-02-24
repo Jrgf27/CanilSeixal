@@ -31,33 +31,19 @@
 <div class="row justify-content-center g-4">
     <div class="col-8 col-md-8 col-lg-8">
         <div class="row">
-            {% for animal in caes %}
-                <div class="col-6 col-md-4 col-lg-3">
-                    <div 
-                    class="card animal-card h-100 text-center"
+            <div class="col-4" id="animal_salvar_div">
+                <div 
+                    class="card animal-card h-100 text-center align-items-center justify-content-center"
 
-                    hx-get="{% url 'load_animal_details' animal.id%}"
-                    hx-target="#modal_content" 
-                    hx-swap="innerHTML"
-
-                    data-bs-toggle="modal" 
-                    data-bs-target="#exampleModal">
-
-                        {% if animal.fotos.all %}
-                                <img 
-                                src="{{ animal.fotos.first.imagem.url }}"
-                                class="animal-avatar"
-                                alt="Your Logo">
-                        {% endif %}
-                        <div class="card-body">
-                            <h5 class="card-title">{{animal.name}}</h5>
-                            <p class="card-text text-muted">{{animal.raca}}</p>
-                            {% if animal.adoptante %}
-                                <p class="card-text text-muted">{{animal.adoptante}}</p>
-                            {% endif %}
-                        </div>
-                    </div>
+                    data-bs-toggle="modal"
+                    data-bs-target="#addAnimalModal"
+                    style="cursor: pointer; border: 2px dashed #ccc;">
+            
+                    <h1 class="text-muted">+</h1>
                 </div>
+            </div>
+            {% for animal in caes %}
+                {% include "mainpage/partials/animal_card_details.html" %}
             {% endfor %}
         </div>
     </div>
@@ -70,5 +56,33 @@
     </div>
 </div>
 
+<div class="modal fade" id="addAnimalModal" tabindex="-1" aria-labelledby="addAnimalModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="addAnimalModalLabel">Adicionar Animal</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form
+        hx-post="{% url 'save_animal_details'%}"
+        hx-target="#animal_salvar_div" 
+        hx-swap="afterend"
+        >
+            <div class="modal-body">
+                {{animal_form | crispy}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button 
+                type="submit" 
+                class="btn btn-success"
+                data-bs-dismiss="modal"
+                >Guardar</button>
+                
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
 {% endblock %}

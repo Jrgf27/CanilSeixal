@@ -1,0 +1,28 @@
+
+
+<div class="col-4">
+    <div 
+    class="card animal-card h-100 text-center"
+
+    hx-get="{% url 'load_animal_details' animal.id%}"
+    hx-target="#modal_content" 
+    hx-swap="innerHTML"
+
+    data-bs-toggle="modal" 
+    data-bs-target="#exampleModal">
+
+        {% if animal.fotos.all %}
+                <img 
+                src="{{ animal.fotos.first.imagem.url }}"
+                class="animal-avatar"
+                alt="Your Logo">
+        {% endif %}
+        <div class="card-body">
+            <h5 class="card-title">{{animal.name}}</h5>
+            <p class="card-text text-muted">{{animal.raca}}</p>
+            {% if animal.adoptante %}
+                <p class="card-text text-muted">{{animal.adoptante}}</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
