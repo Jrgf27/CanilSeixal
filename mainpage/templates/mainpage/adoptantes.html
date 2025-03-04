@@ -1,0 +1,78 @@
+{% extends 'mainpage/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="row justify-content-center g-4">
+    <div class="col-8 col-md-8 col-lg-8">
+        <div class="row">
+            <div 
+                class="card animal-card h-100 text-center align-items-center justify-content-center"
+
+                data-bs-toggle="modal"
+                data-bs-target="#addAdoptanteModal"
+                style="cursor: pointer; border: 2px dashed #ccc;">
+        
+                <h3 class="text-muted">Adicionar Adoptante</h3>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Telemovel</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Animal</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr id="adoptante_salvar_div">
+                    </tr>
+                    {% for adoptante in adoptantes %}
+                        {% include "mainpage/partials/adoptante_details.html" %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="adoptanteDetailsModal" tabindex="-1" aria-labelledby="adoptanteDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="modal_content">
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="addAdoptanteModal" tabindex="-1" aria-labelledby="addAdoptanteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="addAdoptanteModalLabel">Adicionar Animal</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form
+        hx-post="{% url 'adotantes'%}"
+        hx-target="#adoptante_salvar_div" 
+        hx-swap="afterend"
+        >
+            <div class="modal-body">
+                {{adoptante_form | crispy}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button 
+                type="submit" 
+                class="btn btn-success"
+                data-bs-dismiss="modal"
+                >Guardar</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

@@ -59,6 +59,9 @@ class Animal(models.Model):
     adoptante = models.ForeignKey(Adoptante, on_delete=models.SET_NULL, null=True, blank=True)
     last_update_date = models.DateField(auto_now_add=True)
     adopted_date = models.DateField(auto_now_add=True, null=True, blank=True)
+    
+    def __str__(self):
+        return f"{self.name} - {self.raca}" 
 
 
 

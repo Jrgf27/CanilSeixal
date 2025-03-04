@@ -1,0 +1,150 @@
+
+
+<div class="modal-header">
+    <h1 class="modal-title fs-5" id="adoptanteModalLabel">{{adoptante.name}}</h1>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+    <!-- Personal Information Card -->
+    <div class="card mb-4 border-0 shadow-sm">
+        <div class="card-header bg-light">
+            <h5 class="card-title mb-0"><i class="bi bi-person me-2"></i>Informações Pessoais</h5>
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center">
+                        <span class="bg-light rounded-circle p-2 me-2"><i class="bi bi-calendar-event text-secondary"></i></span>
+                        <div>
+                            <small class="text-muted">Idade</small>
+                            <div>{{adoptante.idade}} anos</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center">
+                        <span class="bg-light rounded-circle p-2 me-2"><i class="bi bi-briefcase text-secondary"></i></span>
+                        <div>
+                            <small class="text-muted">Profissão</small>
+                            <div>{{adoptante.profissao|default:"Não especificado"}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center">
+                        <span class="bg-light rounded-circle p-2 me-2"><i class="bi bi-person-vcard text-secondary"></i></span>
+                        <div>
+                            <small class="text-muted">NIF</small>
+                            <div>{{adoptante.nif|default:"Não informado"}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center">
+                        <span class="bg-light rounded-circle p-2 me-2"><i class="bi bi-credit-card text-secondary"></i></span>
+                        <div>
+                            <small class="text-muted">Cartão de Cidadão</small>
+                            <div>{{adoptante.cc|default:"Não informado"}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Information Card -->
+    <div class="card mb-4 border-0 shadow-sm">
+        <div class="card-header bg-light">
+            <h5 class="card-title mb-0"><i class="bi bi-envelope me-2"></i>Contactos</h5>
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center">
+                        <span class="bg-light rounded-circle p-2 me-2"><i class="bi bi-telephone text-secondary"></i></span>
+                        <div>
+                            <small class="text-muted">Telemóvel</small>
+                            <div>{{adoptante.telemovel|default:"Não informado"}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center">
+                        <span class="bg-light rounded-circle p-2 me-2"><i class="bi bi-telephone-fill text-secondary"></i></span>
+                        <div>
+                            <small class="text-muted">Telefone</small>
+                            <div>{{adoptante.telefone|default:"Não informado"}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="d-flex align-items-center">
+                        <span class="bg-light rounded-circle p-2 me-2"><i class="bi bi-at text-secondary"></i></span>
+                        <div>
+                            <small class="text-muted">Email</small>
+                            <div>{{adoptante.email|default:"Não informado"}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Address Information Card -->
+    <div class="card mb-4 border-0 shadow-sm">
+        <div class="card-header bg-light">
+            <h5 class="card-title mb-0"><i class="bi bi-geo-alt me-2"></i>Morada</h5>
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-12">
+                    <div class="d-flex align-items-center">
+                        <span class="bg-light rounded-circle p-2 me-2"><i class="bi bi-signpost text-secondary"></i></span>
+                        <div>
+                            <small class="text-muted">Rua</small>
+                            <div>{{adoptante.rua|default:"Não informado"}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center">
+                        <span class="bg-light rounded-circle p-2 me-2"><i class="bi bi-building text-secondary"></i></span>
+                        <div>
+                            <small class="text-muted">Localidade</small>
+                            <div>{{adoptante.localidade|default:"Não informado"}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center">
+                        <span class="bg-light rounded-circle p-2 me-2"><i class="bi bi-building-fill text-secondary"></i></span>
+                        <div>
+                            <small class="text-muted">Cidade</small>
+                            <div>{{adoptante.cidade|default:"Não informado"}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="d-flex align-items-center">
+                        <span class="bg-light rounded-circle p-2 me-2"><i class="bi bi-mailbox text-secondary"></i></span>
+                        <div>
+                            <small class="text-muted">Código Postal</small>
+                            <div>{{adoptante.codigo_postal|default:"Não informado"}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    {% if adoptante.has_animal %}
+        <button type="button" class="btn btn-success">
+            <i class="bi bi-check-circle me-2"></i>Possui Animal
+        </button>
+    {% else %}
+        <button type="button" class="btn btn-warning">
+            <i class="bi bi-x-circle me-2"></i>Sem Animal
+        </button>
+    {% endif %}
+</div>
