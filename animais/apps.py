@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class UserhandlingConfig(AppConfig):
+class MainpageConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'userhandling'
+    name = 'animais'

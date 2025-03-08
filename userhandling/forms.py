@@ -3,5 +3,5 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 
 class CustomAuthenticationForm(AuthenticationForm):
-    username = forms.CharField(label=_("E-mail Adresse"), max_length=254)
-    password = forms.CharField(label=_("Passwort"), widget=forms.PasswordInput)
+    username = forms.CharField(label=_("E-mail"), max_length=254)
+    password = forms.CharField(label=_("Password"), widget=forms.PasswordInput)

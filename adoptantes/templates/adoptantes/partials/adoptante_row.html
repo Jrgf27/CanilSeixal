@@ -1,0 +1,18 @@
+
+<tr
+hx-get="{% url 'get_adoptante_details' adoptante.id%}"
+hx-target="#modal_content" 
+hx-swap="innerHTML"
+
+data-bs-toggle="modal"
+data-bs-target="#adoptanteDetailsModal"
+>
+    <th scope="row">{{adoptante.name}}</th>
+    <td>{{adoptante.telemovel}}</td>
+    <td>{{adoptante.email}}</td>
+    <td>
+        {% for animal in adoptante.animal_set.all %}
+            {{ animal.name }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </td>
+</tr>

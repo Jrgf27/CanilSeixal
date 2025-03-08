@@ -1,4 +1,4 @@
-{% extends 'mainpage/base.html' %}
+{% extends 'animais/base.html' %}
 
 {% load static %}
 {% load crispy_forms_tags %}
@@ -11,19 +11,19 @@
                 {% csrf_token %}
                 <div class="container overflow-hidden text-center">
                     <div class="row gy-5">
-                        <div class="col-sm-12">
+                        {% comment %} <div class="col-sm-12">
                             <img 
                             src="{% static 'mistery_agency_logo.png' %}"
                             width="300" height="300"
                             class="img-fluid" 
                             alt="Your Logo">
-                        </div>
+                        </div> {% endcomment %}
                         <div class="col-sm-12">
                             {{form | crispy}}
                             <button style="width: 100%;" type="submit" name="register" value="True" class="btn btn-success">
-                                Sign In
+                                Entrar
                             </button> <br><br>
-                            <p><a href="/password-reset">Passwort vergessen?</a></p>
+                            <p><a href="/password-reset">Recuperar password?</a></p>
                         </div>
                     </div>
                 </div>
