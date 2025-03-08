@@ -39,6 +39,7 @@ pip install -r requirements.txt
 
 ### 4️⃣ Configurar a Base de Dados
 ```sh
+python manage.py makemigrations
 python manage.py migrate
 ```
 
