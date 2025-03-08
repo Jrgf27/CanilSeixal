@@ -10,7 +10,7 @@ Antes de iniciar, certifique-se de ter instalado:
 - [pip](https://pip.pypa.io/en/stable/installation/) Normalmente é instalado em conjunto com Python.
 - [Virtualenv](https://virtualenv.pypa.io/en/latest/) Não necessário mas bom de ter para desenvolvimento.
 
-## ⚙️ Como Rodar o Projeto
+## ⚙️ Como Correr o Projeto
 
 ### 1️⃣ Clonar o Repositório
 ```sh
