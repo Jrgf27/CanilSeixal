@@ -42,5 +42,5 @@ class Animal(models.Model):
 class AnimalImages(models.Model):
 
     animal=models.ForeignKey(Animal, on_delete=models.CASCADE, null=True, related_name="fotos")
-    imagem = models.ImageField(upload_to='media/%Y/%m/%d')
+    imagem = models.ImageField(upload_to='%Y/%m/%d')
 
