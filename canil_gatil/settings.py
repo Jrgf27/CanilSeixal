@@ -94,7 +94,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'canil_gatil.wsgi.app'
+WSGI_APPLICATION = 'canil_gatil.wsgi.application'
 
 tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
 
