@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 import logging
+from urllib.parse import urlparse
 
 from dotenv import load_dotenv
 
@@ -44,14 +45,9 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-nb%o9^+*x%q2#4!ly)*%va6t@$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", 'True') == 'True'
 
-if DEBUG:
-    ALLOWED_HOSTS = [
-    '*'
+ALLOWED_HOSTS = [
+'*'
 ]
-else:
-    ALLOWED_HOSTS = [
-        '*'
-    ]
 
 # Application definition
 
@@ -100,10 +96,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'canil_gatil.wsgi.application'
 
+tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': tmpPostgres.path.replace('/', ''),
+        'USER': tmpPostgres.username,
+        'PASSWORD': tmpPostgres.password,
+        'HOST': tmpPostgres.hostname,
+        'PORT': 5432,
     }
 }
 
